@@ -1,0 +1,54 @@
+{
+    "work": [
+        {
+            "role": "Software Engineer",
+            "organization": "NNDI",
+            "period": "Dec 2025 – Present",
+            "mode": "Remote",
+            "summary": "Loan amortization and repayment scheduling algorithms and a OneKhusa disbursement API client in Go, plus Angular interfaces designed in PenPot."
+        },
+        {
+            "role": "Embedded Systems Trainee",
+            "organization": "TME Education · Qubix Robotics",
+            "period": "Jan 2026",
+            "mode": "Onsite",
+            "summary": "Built SecureSense, a state-driven Arduino and C++ security system using motion, distance and flame sensors."
+        },
+        {
+            "role": "Backend Engineer",
+            "organization": "Agrera",
+            "period": "2023 – 2025",
+            "mode": "Student innovation",
+            "summary": "Feed formulation algorithms in Python, a Django marketplace for agricultural products, and a TensorFlow crop disease model."
+        }
+    ],
+    "education": [
+        {
+            "title": "MSc in Applied Data Science (Candidate)",
+            "organization": "Lilongwe University of Agriculture and Natural Resources (LUANAR)",
+            "year": "2028"
+        },
+        {
+            "title": "BSc in Agricultural Innovations",
+            "organization": "Lilongwe University of Agriculture and Natural Resources (LUANAR)",
+            "year": "2024"
+        },
+        {
+            "title": "Electronics and Arduino Programming",
+            "organization": "TME Education · Qubix Robotics",
+            "year": "2026"
+        }
+    ],
+    "achievements": [
+        {
+            "title": "Top 10, Agritech Challenge",
+            "organization": "Save the Children & GIZ · Agrera",
+            "year": "2024"
+        },
+        {
+            "title": "Technology Transfer & Commercialization Grant",
+            "organization": "NCST · Agrera",
+            "year": "2025"
+        }
+    ]
+}

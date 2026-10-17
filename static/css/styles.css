@@ -510,6 +510,307 @@ html {
     }
 }
 
+/* Home sections below the hero */
+
+.home-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    margin-top: 72px;
+}
+
+.home-heading {
+    margin-bottom: 24px;
+}
+
+.home-heading .section-label {
+    margin-bottom: 10px;
+}
+
+.home-sections .home-title {
+    margin: 0;
+    font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+/* Heading with a link on the right ("All projects") */
+.home-heading--split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 24px;
+}
+
+.home-more {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.home-more span {
+    display: inline-block;
+    transition: transform var(--transition);
+}
+
+.home-more:hover {
+    color: var(--color-white);
+}
+
+.home-more:hover span {
+    transform: translateX(4px);
+}
+
+.home-more:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* What I work on */
+
+.capability-list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    list-style: none;
+}
+
+.capability {
+    padding: 22px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+}
+
+.capability-number {
+    display: block;
+    margin-bottom: 12px;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-accent);
+}
+
+.capability-title {
+    margin: 0 0 8px;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.home-sections .capability-description {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+/* Experience */
+
+.experience-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+/* Vertical line with a dot per role */
+.timeline {
+    margin: 0;
+    padding: 0 0 0 24px;
+    list-style: none;
+    border-left: 1px solid var(--color-border-strong);
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-item + .timeline-item {
+    margin-top: 32px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: -29px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
+}
+
+.timeline-item:first-child::before {
+    background: var(--color-accent);
+}
+
+.home-sections .timeline-period {
+    margin: 0 0 6px;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+}
+
+.timeline-role {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.home-sections .timeline-org {
+    margin: 2px 0 10px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-accent);
+}
+
+.home-sections .timeline-summary {
+    max-width: 620px;
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+.experience-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.side-block {
+    padding: 22px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.side-heading {
+    margin: 0 0 16px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+}
+
+.side-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    list-style: none;
+}
+
+.side-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.side-title {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.side-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+/* Toolbox */
+
+.toolbox {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.toolbox-group {
+    padding: 22px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.toolbox-heading {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.toolbox .tech-list {
+    margin: 0;
+}
+
+@media (min-width: 640px) {
+    .capability-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Five items: the last one takes the full row */
+    .capability:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 900px) {
+    .home-sections {
+        gap: 112px;
+        margin-top: 48px;
+    }
+
+    .home-heading {
+        margin-bottom: 32px;
+    }
+
+    /* Six-column grid: 3 cards on top, 2 wider cards below */
+    .capability-list {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+    }
+
+    .capability {
+        grid-column: span 2;
+        padding: 26px;
+    }
+
+    .capability:nth-child(n + 4) {
+        grid-column: span 3;
+    }
+
+    .capability:last-child:nth-child(odd) {
+        grid-column: span 3;
+    }
+
+    /* Doubled class beats the 2-column .project-grid rule further down */
+    .project-grid.project-grid--three {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .experience-layout {
+        grid-template-columns: 1.6fr 1fr;
+        gap: 64px;
+    }
+
+    .toolbox {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-more,
+    .home-more span {
+        transition: none;
+    }
+}
+
 /* ==========================================================================
    Contact
    ========================================================================== */
@@ -995,14 +1296,14 @@ html {
     letter-spacing: -0.01em;
 }
 
-.projects-page .project-role {
+.project-card .project-role {
     margin: 4px 0 14px;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-accent);
 }
 
-.projects-page .project-description {
+.project-card .project-description {
     margin: 0 0 20px;
     font-size: 0.9375rem;
     line-height: 1.7;

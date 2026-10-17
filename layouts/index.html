@@ -1,5 +1,6 @@
 {{ define "main" }}
     {{ $contact := partial "contact-info.html" . }}
+    {{ $experience := hugo.Data.experience }}
     <div class="container">
         <div class="hero-section">
             <div class="profile-image-section">
@@ -17,5 +18,110 @@
                 {{ partial "social-links.html" $contact }}
             </div>
         </div>
+    </div>
+
+    <div class="home-sections container">
+
+        <!-- What I work on -->
+        <section class="home-section" aria-labelledby="work-on-heading">
+            <div class="home-heading" data-reveal-stagger>
+                <h2 class="section-label reveal" id="work-on-heading">What I work on</h2>
+                <p class="home-title reveal">From the API to the algorithm to the sensor.</p>
+            </div>
+
+            <ol class="capability-list" data-reveal-stagger>
+                {{ range $index, $item := hugo.Data.capabilities }}
+                    <li class="capability reveal">
+                        <span class="capability-number" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
+                        <h3 class="capability-title">{{ $item.title }}</h3>
+                        <p class="capability-description">{{ $item.description }}</p>
+                    </li>
+                {{ end }}
+            </ol>
+        </section>
+
+        <!-- Selected work: the first three projects from data/projects.json -->
+        <section class="home-section" aria-labelledby="selected-heading">
+            <div class="home-heading home-heading--split" data-reveal-stagger>
+                <div>
+                    <h2 class="section-label reveal" id="selected-heading">Selected work</h2>
+                    <p class="home-title reveal">A few things I've built.</p>
+                </div>
+                <a href="/projects/" class="home-more reveal">All projects <span aria-hidden="true">&rarr;</span></a>
+            </div>
+
+            <div class="project-grid project-grid--three" data-reveal-stagger>
+                {{ range $index, $project := first 3 hugo.Data.projects }}
+                    {{ partial "project-card.html" (dict "project" $project "number" (add $index 1)) }}
+                {{ end }}
+            </div>
+        </section>
+
+        <!-- Experience, education and recognition -->
+        <section class="home-section" aria-labelledby="experience-heading">
+            <div class="home-heading" data-reveal-stagger>
+                <h2 class="section-label reveal" id="experience-heading">Experience</h2>
+                <p class="home-title reveal">Where I've been building.</p>
+            </div>
+
+            <div class="experience-layout">
+                <ol class="timeline" data-reveal-stagger>
+                    {{ range $experience.work }}
+                        <li class="timeline-item reveal">
+                            <p class="timeline-period">{{ .period }} &middot; {{ .mode }}</p>
+                            <h3 class="timeline-role">{{ .role }}</h3>
+                            <p class="timeline-org">{{ .organization }}</p>
+                            <p class="timeline-summary">{{ .summary }}</p>
+                        </li>
+                    {{ end }}
+                </ol>
+
+                <div class="experience-side" data-reveal-stagger>
+                    <div class="side-block reveal">
+                        <h3 class="side-heading">Recognition</h3>
+                        <ul class="side-list">
+                            {{ range $experience.achievements }}
+                                <li>
+                                    <span class="side-title">{{ .title }}</span>
+                                    <span class="side-meta">{{ .organization }} &middot; {{ .year }}</span>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+
+                    <div class="side-block reveal">
+                        <h3 class="side-heading">Education</h3>
+                        <ul class="side-list">
+                            {{ range $experience.education }}
+                                <li>
+                                    <span class="side-title">{{ .title }}</span>
+                                    <span class="side-meta">{{ .organization }} &middot; {{ .year }}</span>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolbox -->
+        <section class="home-section" aria-labelledby="toolbox-heading">
+            <div class="home-heading" data-reveal-stagger>
+                <h2 class="section-label reveal" id="toolbox-heading">Toolbox</h2>
+                <p class="home-title reveal">What I reach for but not limited.</p>
+            </div>
+
+            <div class="toolbox" data-reveal-stagger>
+                {{ range hugo.Data.toolbox }}
+                    <div class="toolbox-group reveal">
+                        <h3 class="toolbox-heading">{{ .group }}</h3>
+                        <ul class="tech-list">
+                            {{ range .items }}<li>{{ . }}</li>{{ end }}
+                        </ul>
+                    </div>
+                {{ end }}
+            </div>
+        </section>
+
     </div>
 {{ end }}
