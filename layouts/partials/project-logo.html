@@ -1,0 +1,18 @@
+{{- /*
+    Project logo from static/images/projects (mounted into assets, see hugo.toml).
+
+    Raster logos are fitted into a 56px tile and served as WebP at 2x;
+    SVG logos are published as they are.
+
+    Usage: {{ partial "project-logo.html" $project }}
+*/ -}}
+{{- with .image -}}
+    {{- with resources.Get (printf "images/projects/%s" .) -}}
+        {{- if eq .MediaType.SubType "svg" -}}
+            <img src="{{ .RelPermalink }}" alt="" width="56" height="56" loading="lazy" decoding="async">
+        {{- else -}}
+            {{- $img := .Fit "112x112 webp q80" -}}
+            <img src="{{ $img.RelPermalink }}" alt="" width="{{ div $img.Width 2 }}" height="{{ div $img.Height 2 }}" loading="lazy" decoding="async">
+        {{- end -}}
+    {{- end -}}
+{{- end -}}

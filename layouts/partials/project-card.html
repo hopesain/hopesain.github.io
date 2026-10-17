@@ -1,0 +1,34 @@
+{{- /*
+    One project from data/projects.json.
+
+    Params (dict):
+      project    the project entry
+      number     its position in the list (shown as 01, 02, ...)
+      featured   true to give the card a full row
+
+    Usage: {{ partial "project-card.html" (dict "project" $p "number" 1) }}
+*/ -}}
+{{- $p := .project -}}
+{{- $label := $p.link | replaceRE `^https?://(www\.)?` "" | strings.TrimSuffix "/" -}}
+<article class="project-card reveal{{ if .featured }} is-featured{{ end }}">
+    <div class="project-head">
+        <span class="project-logo">{{ partial "project-logo.html" $p }}</span>
+        <span class="project-number" aria-hidden="true">{{ printf "%02d" .number }}</span>
+    </div>
+
+    <h3 class="project-name">{{ $p.name }}</h3>
+    <p class="project-role">{{ $p.role }}</p>
+    <p class="project-description">{{ $p.description }}</p>
+
+    {{ with $p.technologies }}
+        <ul class="tech-list" aria-label="Technologies">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+    {{ end }}
+
+    {{ with $p.link }}
+        <a href="{{ . }}" class="project-link" target="_blank" rel="noopener">
+            {{ $label }} <span aria-hidden="true">&nearr;</span>
+        </a>
+    {{ end }}
+</article>

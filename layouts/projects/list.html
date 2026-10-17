@@ -1,0 +1,53 @@
+{{ define "main" }}
+    {{ $projects := hugo.Data.projects }}
+    <div class="projects-page container">
+
+        <section class="projects-intro" data-reveal-stagger>
+            <p class="eyebrow reveal">Projects</p>
+            <h1 class="projects-title reveal">I build the parts you don't see.</h1>
+            <p class="projects-lead reveal">
+                APIs, algorithms, data and embedded firmware: the logic that keeps a product
+                running. I'm a backend and systems programmer first, and most of my work
+                lives behind the interface.
+            </p>
+
+            <ul class="focus-list reveal" aria-label="Where I spend my time">
+                <li>Backend &amp; APIs</li>
+                <li>Algorithms</li>
+                <li>Machine learning</li>
+                <li>Embedded &amp; IoT</li>
+            </ul>
+        </section>
+
+        <!-- Systems work first; the websites follow as a smaller "also built" list -->
+        <section class="projects-group" aria-labelledby="systems-heading">
+            <h2 class="section-label reveal" id="systems-heading">Systems &amp; backends</h2>
+
+            <div class="project-grid" data-reveal-stagger>
+                {{ $first := true }}
+                {{ range $index, $project := $projects }}
+                    {{ if eq $project.type "systems" }}
+                        {{ partial "project-card.html" (dict "project" $project "number" (add $index 1) "featured" $first) }}
+                        {{ $first = false }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
+
+        <section class="projects-group" aria-labelledby="web-heading">
+            <h2 class="section-label reveal" id="web-heading">Also built</h2>
+            <p class="projects-note reveal">
+                A couple of websites, kept simple and fast with Hugo. I prefer keeping things simple and performant, so the sites should still load quickly and work on every screen.
+            </p>
+
+            <div class="project-grid project-grid--compact" data-reveal-stagger>
+                {{ range $index, $project := $projects }}
+                    {{ if eq $project.type "web" }}
+                        {{ partial "project-card.html" (dict "project" $project "number" (add $index 1)) }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
+
+    </div>
+{{ end }}

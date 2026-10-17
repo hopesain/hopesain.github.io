@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Qatarina",
+        "role": "Core Maintainer & Backend Engineer",
+        "description": "An open-source platform for software quality assurance and user acceptance testing. I help maintain the project, working mostly on the Go API and contributing across the React frontend.",
+        "technologies": ["Golang", "Fiber", "React"],
+        "link": "https://github.com/golang-malawi/qatarina",
+        "image": "qatarina.jpeg",
+        "type": "systems"
+    },
+    {
+        "name": "Agrera",
+        "role": "Backend Developer",
+        "description": "An agritech platform for farmers. I built the feed formulation algorithms for chickens, pigs and quails, the Django marketplace for agricultural products, and a TensorFlow model that identifies maize, cotton and tomato diseases. Top 10 in the Save the Children & GIZ Agritech Challenge.",
+        "technologies": ["Python", "Django", "TensorFlow"],
+        "link": "https://agrera.africa",
+        "image": "agrera.jpeg",
+        "type": "systems"
+    },
+    {
+        "name": "SecureSense",
+        "role": "IoT Developer",
+        "description": "A smart security system that protects valuable items. A state-driven controller reads motion, distance and flame sensors, escalates alerts as someone gets closer, then sounds the alarm and locks access.",
+        "technologies": ["C++", "Arduino"],
+        "link": "https://github.com/hopesain/secure-sense",
+        "image": "secure-sense.jpeg",
+        "type": "systems"
+    },
+    {
+        "name": "Nextroad Solutions",
+        "role": "Web Developer",
+        "description": "The company website for Nextroad Solutions, a microfinance and core banking technology firm.",
+        "technologies": ["Hugo"],
+        "link": "https://www.nextroadsolutions.com",
+        "image": "nextroad-solutions.jpeg",
+        "type": "web"
+    },
+    {
+        "name": "ZowetaCare",
+        "role": "Web Developer",
+        "description": "The website for ZowetaCare, an animal health organisation.",
+        "technologies": ["Hugo"],
+        "link": "https://zowetacare.netlify.app",
+        "image": "zowetacare.jpeg",
+        "type": "web"
+    }
+]
