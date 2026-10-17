@@ -27,3 +27,19 @@ title = 'Hope Sain'
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+# Project logos live in static/images/projects (drop-in replaceable) but are
+# mounted into assets so Hugo can resize and compress them. The originals are
+# excluded from static so only the optimised versions are published.
+# Declaring mounts replaces the defaults, so assets and static are re-added.
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+    files = ['! images/projects/**']
+  [[module.mounts]]
+    source = 'static/images/projects'
+    target = 'assets/images/projects'

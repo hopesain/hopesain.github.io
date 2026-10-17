@@ -866,6 +866,287 @@ html {
 }
 
 /* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.projects-page {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+/* Intro */
+
+.projects-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.projects-title {
+    max-width: 760px;
+    margin: 8px 0 0;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+}
+
+.projects-page .projects-lead {
+    max-width: 640px;
+    margin: 0;
+    font-size: clamp(1rem, 2.4vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+/* "Where I spend my time" chips */
+.focus-list {
+    margin: 8px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+}
+
+.focus-list li {
+    padding: 6px 12px;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 8px;
+}
+
+.focus-list li::before {
+    content: "> ";
+    color: var(--color-accent);
+}
+
+/* Groups */
+
+.projects-page .projects-note {
+    max-width: 620px;
+    margin: -8px 0 20px;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* Card */
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 22px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--transition), background-color var(--transition);
+}
+
+.project-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--color-border-strong);
+}
+
+.project-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.project-logo {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--color-surface-solid);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.project-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-number {
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-accent);
+}
+
+.project-name {
+    margin: 0;
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.projects-page .project-role {
+    margin: 4px 0 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+}
+
+.projects-page .project-description {
+    margin: 0 0 20px;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+.tech-list {
+    margin: auto 0 20px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+}
+
+.tech-list li {
+    padding: 3px 10px;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+    font-size: 0.75rem;
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+.project-link {
+    align-self: flex-start;
+    padding-top: 16px;
+    width: 100%;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    border-top: 1px solid var(--color-border);
+    transition: color var(--transition);
+}
+
+.project-link span {
+    display: inline-block;
+    transition: transform var(--transition);
+}
+
+.project-link:hover {
+    color: var(--color-white);
+}
+
+.project-link:hover span {
+    transform: translate(2px, -2px);
+}
+
+.project-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* Compact cards for the websites */
+.project-grid--compact .project-card {
+    padding: 20px;
+}
+
+.project-grid--compact .project-name {
+    font-size: 1.125rem;
+}
+
+@media (min-width: 640px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Featured project: full row, description beside the details */
+    .project-card.is-featured {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 900px) {
+    .projects-page {
+        gap: 72px;
+    }
+
+    .project-card {
+        padding: 28px 26px;
+    }
+
+    .project-card.is-featured {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        grid-template-rows: auto auto 1fr auto;
+        column-gap: 48px;
+        padding: 36px;
+        background:
+            radial-gradient(ellipse 70% 100% at 100% 0%, rgba(122, 162, 255, 0.08), transparent),
+            var(--color-surface);
+    }
+
+    /* Number sits beside the logo so it doesn't float mid-card */
+    .project-card.is-featured .project-head {
+        grid-column: 1;
+        grid-row: 1;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
+    .project-card.is-featured .project-name {
+        grid-column: 1;
+        grid-row: 2;
+        font-size: 1.75rem;
+    }
+
+    .project-card.is-featured .project-role {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .project-card.is-featured .project-description {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        margin: 0;
+        font-size: 1.0625rem;
+    }
+
+    .project-card.is-featured .tech-list {
+        grid-column: 2;
+        grid-row: 3;
+        margin: 20px 0 0;
+        align-self: start;
+    }
+
+    .project-card.is-featured .project-link {
+        grid-column: 1 / -1;
+        grid-row: 4;
+        margin-top: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-link,
+    .project-link span {
+        transition: none;
+    }
+}
+
+/* ==========================================================================
    404
    ========================================================================== */
 
