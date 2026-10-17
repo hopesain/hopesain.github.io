@@ -4,7 +4,7 @@
     {{/* The contact page already makes this pitch, so skip it there */}}
     {{ if ne .Section "contact" }}
         <div class="footer-hello">
-            <p class="footer-status"><span class="status-dot" aria-hidden="true"></span>Open to collaborations</p>
+            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Open to collaborations</p>
             <p class="footer-pitch">Have an idea, a project or a problem worth solving?</p>
             {{ with $contact.email }}
                 <a href="mailto:{{ . }}" class="footer-email">Say hello <span aria-hidden="true">&rarr;</span></a>
@@ -25,7 +25,7 @@
 
         {{/* Local time is filled in by scripts.js; without JS only the place shows */}}
         <p class="footer-local">
-            {{ with $contact.location }}{{ . }}{{ end }}<span class="local-time" data-timezone="Africa/Blantyre" hidden></span>
+            {{ with $contact.location }}{{ . }}{{ end }}<span class="local-time" hidden></span>
         </p>
     </div>
 

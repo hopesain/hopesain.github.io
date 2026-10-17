@@ -36,22 +36,75 @@
     });
 })();
 
-// Footer: my local time in Malawi
+// My local time in Malawi (footer and contact page)
 (function () {
-    const el = document.querySelector(".local-time");
-    if (!el) return;
+    const items = document.querySelectorAll(".local-time");
+    if (!items.length) return;
 
     const format = new Intl.DateTimeFormat("en-GB", {
         hour: "2-digit",
         minute: "2-digit",
-        timeZone: el.dataset.timezone,
+        timeZone: "Africa/Blantyre",
     });
 
     function tick() {
-        el.textContent = " \u00b7 " + format.format(new Date()) + " CAT";
+        const text = " · " + format.format(new Date()) + " CAT";
+        items.forEach(function (item) { item.textContent = text; });
     }
 
     tick();
-    el.hidden = false;
+    items.forEach(function (item) { item.hidden = false; });
     setInterval(tick, 30000);
+})();
+
+// Copy to clipboard (e.g. the email on the contact page)
+(function () {
+    if (!navigator.clipboard) return;
+
+    document.querySelectorAll("[data-copy]").forEach(function (button) {
+        const label = button.textContent;
+        let timer;
+
+        button.hidden = false;
+        button.addEventListener("click", function () {
+            navigator.clipboard.writeText(button.dataset.copy).then(function () {
+                button.textContent = "Copied!";
+                button.classList.add("is-copied");
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    button.textContent = label;
+                    button.classList.remove("is-copied");
+                }, 2000);
+            });
+        });
+    });
+})();
+
+// Scroll reveal
+// Elements with class "reveal" animate in when they enter the viewport.
+// Children of a [data-reveal-stagger] parent animate one after another.
+(function () {
+    document.querySelectorAll("[data-reveal-stagger]").forEach(function (group) {
+        group.querySelectorAll(":scope > .reveal").forEach(function (item, index) {
+            item.style.setProperty("--reveal-delay", index * 0.1 + "s");
+        });
+    });
+
+    const items = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+        items.forEach(function (item) { item.classList.add("is-visible"); });
+        return;
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+    items.forEach(function (item) { observer.observe(item); });
 })();
