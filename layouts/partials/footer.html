@@ -6,9 +6,14 @@
         <div class="footer-hello">
             <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Open to collaborations</p>
             <p class="footer-pitch">Have an idea, a project or a problem worth solving?</p>
-            {{ with $contact.email }}
-                <a href="mailto:{{ . }}" class="footer-email">Say hello <span aria-hidden="true">&rarr;</span></a>
-            {{ end }}
+            <div class="footer-actions">
+                {{ with $contact.email }}
+                    <a href="mailto:{{ . }}" class="footer-email">Say hello <span aria-hidden="true">&rarr;</span></a>
+                {{ end }}
+                {{ with $contact.phone }}
+                    <p class="footer-phone">or call <a href="tel:{{ . }}">{{ $contact.phoneDisplay }}</a></p>
+                {{ end }}
+            </div>
         </div>
     {{ end }}
 

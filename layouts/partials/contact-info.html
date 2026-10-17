@@ -3,6 +3,8 @@
 
     Returns a dict:
       email
+      phone         raw number, e.g. "+265998664910"   (use in tel: links)
+      phoneDisplay  readable number, e.g. "+265 998 664 910"
       location      e.g. "Malawi"
       resume        path to the resume PDF
       socials       ordered list of { key, label, url, icon } — empty links are skipped
@@ -10,6 +12,13 @@
     Usage: {{ $contact := partial "contact-info.html" . }}
 */ -}}
 {{- $c := hugo.Data.contact.details -}}
+
+{{- $phone := replace ($c.phone | default "") " " "" -}}
+{{- $phoneDisplay := $phone -}}
+{{- /* Malawi format: +265 998 664 910 */ -}}
+{{- if and (hasPrefix $phone "+265") (eq (len $phone) 13) -}}
+    {{- $phoneDisplay = printf "%s %s %s %s" (substr $phone 0 4) (substr $phone 4 3) (substr $phone 7 3) (substr $phone 10 3) -}}
+{{- end -}}
 
 {{- $location := slice -}}
 {{- with $c.district }}{{ $location = $location | append (title .) }}{{ end -}}
@@ -29,6 +38,8 @@
 
 {{- return dict
     "email" ($c.email | default "")
+    "phone" $phone
+    "phoneDisplay" $phoneDisplay
     "location" (delimit $location ", ")
     "resume" ($c.resume | default "")
     "socials" $socials
