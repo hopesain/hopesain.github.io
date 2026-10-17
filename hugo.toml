@@ -15,7 +15,7 @@ disableKinds = ['taxonomy', 'term']
   description = 'Hope Sain is a computer programmer from Malawi building backend systems, APIs, data and machine learning solutions, and embedded IoT systems.'
   # From Google Search Console: Settings > Ownership verification > HTML tag.
   # Paste only the content="..." value here.
-  googleSiteVerification = ''
+  googleSiteVerification = 'XSrrq6bVKWO_wQBqlHMnCmVUJTB4DIDwUppRd4N9tGg'
 
 # Projects now come from data/projects.json, so the old Markdown pages in
 # content/projects/ are not built (keeps empty placeholder pages out of Google)
