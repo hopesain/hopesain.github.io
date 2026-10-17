@@ -629,7 +629,7 @@ html {
     color: var(--color-text);
 }
 
-.terminal-email {
+.terminal-link {
     color: var(--color-white);
     text-decoration: underline;
     text-decoration-color: var(--color-border-strong);
@@ -638,7 +638,7 @@ html {
     transition: text-decoration-color var(--transition);
 }
 
-.terminal-email:hover {
+.terminal-link:hover {
     text-decoration-color: var(--color-accent);
 }
 
@@ -698,7 +698,7 @@ html {
 
 /* Channels */
 
-/* Two columns from the start; the email card (first) gets a full row */
+/* Two columns from the start; email and phone (first two) get full rows */
 .channel-list {
     margin: 0;
     padding: 0;
@@ -708,7 +708,7 @@ html {
     list-style: none;
 }
 
-.channel-list li:first-child {
+.channel-list li:nth-child(-n + 2) {
     grid-column: 1 / -1;
 }
 
@@ -799,7 +799,7 @@ html {
 
 .channel:focus-visible,
 .copy-button:focus-visible,
-.terminal-email:focus-visible {
+.terminal-link:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
 }
@@ -834,12 +834,12 @@ html {
         grid-column: 1 / -1;
     }
 
-    /* One row: the email card is wider so the address fits */
+    /* Two rows of three: contact, then profiles and resume */
     .channel-list {
-        grid-template-columns: 2fr repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .channel-list li:first-child {
+    .channel-list li:nth-child(-n + 2) {
         grid-column: auto;
     }
 
@@ -860,7 +860,7 @@ html {
     .channel,
     .channel-arrow,
     .copy-button,
-    .terminal-email {
+    .terminal-link {
         transition: none;
     }
 }
@@ -910,6 +910,34 @@ html {
     font-weight: 600;
     line-height: 1.2;
     color: var(--color-white);
+}
+
+.footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 20px;
+}
+
+.footer .footer-phone {
+    margin: 0;
+    color: var(--color-text-subtle);
+}
+
+.footer-phone a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--transition);
+}
+
+.footer-phone a:hover {
+    color: var(--color-white);
+}
+
+.footer-phone a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 .footer-email {

@@ -28,8 +28,17 @@
                         <div>
                             <dt>email</dt>
                             <dd>
-                                <a href="mailto:{{ . }}" class="terminal-email">{{ . }}</a>
+                                <a href="mailto:{{ . }}" class="terminal-link">{{ . }}</a>
                                 {{/* Shown by scripts.js when the clipboard is available */}}
+                                <button type="button" class="copy-button" data-copy="{{ . }}" hidden>Copy</button>
+                            </dd>
+                        </div>
+                    {{ end }}
+                    {{ with $contact.phone }}
+                        <div>
+                            <dt>phone</dt>
+                            <dd>
+                                <a href="tel:{{ . }}" class="terminal-link">{{ $contact.phoneDisplay }}</a>
                                 <button type="button" class="copy-button" data-copy="{{ . }}" hidden>Copy</button>
                             </dd>
                         </div>
@@ -60,6 +69,15 @@
                         <a href="mailto:{{ . }}" class="channel">
                             <span class="channel-name">Email</span>
                             <span class="channel-handle">{{ . }}</span>
+                            <span class="channel-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                    </li>
+                {{ end }}
+                {{ with $contact.phone }}
+                    <li class="reveal">
+                        <a href="tel:{{ . }}" class="channel">
+                            <span class="channel-name">Phone</span>
+                            <span class="channel-handle">{{ $contact.phoneDisplay }}</span>
                             <span class="channel-arrow" aria-hidden="true">&nearr;</span>
                         </a>
                     </li>
