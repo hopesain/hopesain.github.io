@@ -1,16 +1,29 @@
+{{ $current := .RelPermalink }}
 <div class="nav-bar">
-    <div class="logo">
-        <h3>Hope Sain</h3>
-    </div>
 
-    <div class="nav-items-section">
+    <a href="/" class="brand">Hope Sain</a>
+
+    <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-items-section" id="primary-navigation" aria-label="Primary">
         <ul class="nav-items">
-            <li><a href="/">Home</a></li>
-            <li><a href="/articles/">Articles</a></li>
-            <li><a href="/projects/">Projects</a></li>
-            <li><a href="/contact/">Contact</a></li>
+            {{ range site.Menus.main }}
+                {{ $active := or (eq $current .URL) (and (ne .URL "/") (hasPrefix $current .URL)) }}
+                <li>
+                    <a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+                </li>
+            {{ end }}
         </ul>
-
-    </div>
+    </nav>
 
 </div>
