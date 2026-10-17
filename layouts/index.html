@@ -1,29 +1,21 @@
 {{ define "main" }}
+    {{ $contact := partial "contact-info.html" . }}
     <div class="container">
         <div class="hero-section">
             <div class="profile-image-section">
-                <img src="images/profile/portfolio-profile.jpg" alt="portfolio-profile-image">
+                {{ partial "profile-image.html" (dict "eager" true) }}
             </div>
 
             <div class="profile-summary">
-                <p class="hero-title">Hello, I'm Hope Sain</p>
+                <h1 class="hero-title">Hello, I'm Hope Sain</h1>
 
                 <p class="hero-description">
                     Computer programmer from Malawi focused on high-performance
                     software and resilient systems.
                 </p>
-                
-                <div class="social-links">
-                    <a href="resume/Hope-Sain-Resume.pdf" target="_blank"><button class="resume-button">Resume</button></a>
-                    <a href="https://github.com/hopesain" target="_blank"><img src="images/socials/github.png" alt="github-logo"></a>
-                    <a href="https://x.com/HopeSain" target="_blank"><img src="images/socials/x.png" alt="x-logo"></a>
-                    <a href="https://www.linkedin.com/in/hopesain/" target="_blank"><img src="images/socials/linkedin.png" alt="linkedin-logo"></a>
-                </div>
 
+                {{ partial "social-links.html" $contact }}
             </div>
-
         </div>
-
     </div>
-
 {{ end }}

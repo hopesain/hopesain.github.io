@@ -1,0 +1,39 @@
+{{- /*
+    Responsive, compressed profile photo (assets/images/profile/hopesain.jpeg).
+
+    The source is cropped to a 4:5 portrait and served as WebP at several widths,
+    so phones (near full-width photo) and desktop (280px) each download only what
+    they need. Widths larger than the source can supply are skipped, so the photo
+    is never upscaled; a larger source photo unlocks sharper versions.
+
+    Params (dict):
+      eager    true for the above-the-fold photo (the LCP image)
+
+    Usage: {{ partial "profile-image.html" (dict "eager" true) }}
+*/ -}}
+{{- with resources.Get "images/profile/hopesain.jpeg" -}}
+    {{- $src := . -}}
+    {{- $maxW := math.Min $src.Width (div (mul $src.Height 4) 5) | int -}}
+    {{- $widths := slice -}}
+    {{- range slice 280 360 440 560 720 -}}
+        {{- if le . $maxW }}{{ $widths = $widths | append . }}{{ end -}}
+    {{- end -}}
+    {{- if not (in $widths $maxW) }}{{ $widths = $widths | append $maxW }}{{ end -}}
+
+    {{- $srcset := slice -}}
+    {{- $fallback := "" -}}
+    {{- range $widths -}}
+        {{- $img := $src.Fill (printf "%dx%d webp q78 Center" . (div (mul . 5) 4)) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $img.RelPermalink .) -}}
+        {{- if or (not $fallback) (le . 440) }}{{ $fallback = $img }}{{ end -}}
+    {{- end -}}
+    <img
+        src="{{ $fallback.RelPermalink }}"
+        srcset="{{ delimit $srcset ", " }}"
+        sizes="(min-width: 900px) 280px, min(calc(100vw - 32px), 480px)"
+        width="400"
+        height="500"
+        alt="Hope Sain"
+        {{- if $.eager }} fetchpriority="high" decoding="async"{{ else }} loading="lazy" decoding="async"{{ end }}
+    >
+{{- end -}}

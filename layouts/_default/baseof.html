@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hope Sain</title>
 
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.tagline }}{{ end }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -16,13 +24,12 @@
         {{ block "main" . }}
             <p>This is the foundation base and the contents within it will be replaced</p>
         {{ end }}
-    
     </main>
 
     <footer class="footer">
         {{ partial "footer.html" . }}
     </footer>
 
-    <script src="/js/scripts.js"></script>
+    <script src="/js/scripts.js" defer></script>
 </body>
 </html>

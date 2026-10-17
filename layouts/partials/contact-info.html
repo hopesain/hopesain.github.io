@@ -1,0 +1,35 @@
+{{- /*
+    Single source for contact details (data/contact/details.json).
+
+    Returns a dict:
+      email
+      location      e.g. "Malawi"
+      resume        path to the resume PDF
+      socials       ordered list of { key, label, url, icon } — empty links are skipped
+
+    Usage: {{ $contact := partial "contact-info.html" . }}
+*/ -}}
+{{- $c := hugo.Data.contact.details -}}
+
+{{- $location := slice -}}
+{{- with $c.district }}{{ $location = $location | append (title .) }}{{ end -}}
+{{- with $c.country }}{{ $location = $location | append (title .) }}{{ end -}}
+
+{{- $networks := slice
+    (dict "key" "github"   "label" "GitHub")
+    (dict "key" "linkedin" "label" "LinkedIn")
+    (dict "key" "x"        "label" "X")
+-}}
+{{- $socials := slice -}}
+{{- range $n := $networks -}}
+    {{- with index $c $n.key -}}
+        {{- $socials = $socials | append (dict "key" $n.key "label" $n.label "url" . "icon" (printf "/images/socials/%s.png" $n.key)) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return dict
+    "email" ($c.email | default "")
+    "location" (delimit $location ", ")
+    "resume" ($c.resume | default "")
+    "socials" $socials
+-}}

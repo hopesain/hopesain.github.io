@@ -1,0 +1,14 @@
+{{- /*
+    Resume button followed by the social icons.
+    Usage: {{ partial "social-links.html" (partial "contact-info.html" .) }}
+*/ -}}
+<div class="social-links">
+    {{ with .resume }}
+        <a href="{{ . }}" class="resume-button" target="_blank" rel="noopener">Resume</a>
+    {{ end }}
+    {{ range .socials }}
+        <a href="{{ .url }}" class="social-icon" target="_blank" rel="noopener" aria-label="{{ .label }}">
+            <img src="{{ .icon }}" alt="" width="28" height="28">
+        </a>
+    {{ end }}
+</div>

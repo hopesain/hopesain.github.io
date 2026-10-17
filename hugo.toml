@@ -1,6 +1,28 @@
 baseURL = "https://hopesain.github.io/"
 locale = 'en-us'
-title = 'Hope Sain Portfolio'
+title = 'Hope Sain'
+
+[params]
+  tagline = 'Computer programmer from Malawi.'
+
+# Shared by the header and the footer's "Explore" column
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menus.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 20
+  [[menus.main]]
+    name = 'Articles'
+    url = '/articles/'
+    weight = 30
+  [[menus.main]]
+    name = 'Contact'
+    url = '/contact/'
+    weight = 40
 
 [caches]
   [caches.images]
