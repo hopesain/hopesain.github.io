@@ -1,8 +1,32 @@
+{{ $contact := partial "contact-info.html" . }}
 <div class="footer-section container">
-    <p>All rights reserved. Hope Sain &copy; {{ time.Now.Year }}</p>
-    <div class="social-links">
-        <a href="https://github.com/hopesain" target="_blank"><img src="/images/socials/github.png" alt="github-logo"></a>
-        <a href="https://x.com/HopeSain" target="_blank"><img src="/images/socials/x.png" alt="x-logo"></a>
-        <a href="https://www.linkedin.com/in/hopesain/" target="_blank"><img src="/images/socials/linkedin.png" alt="linkedin-logo"></a>
+
+    {{/* The contact page already makes this pitch, so skip it there */}}
+    {{ if ne .Section "contact" }}
+        <div class="footer-hello">
+            <p class="footer-status"><span class="status-dot" aria-hidden="true"></span>Open to collaborations</p>
+            <p class="footer-pitch">Have an idea, a project or a problem worth solving?</p>
+            {{ with $contact.email }}
+                <a href="mailto:{{ . }}" class="footer-email">Say hello <span aria-hidden="true">&rarr;</span></a>
+            {{ end }}
+        </div>
+    {{ end }}
+
+    <div class="footer-bar">
+        <p class="footer-copy">&copy; {{ now.Year }} {{ site.Title }}</p>
+
+        <div class="social-links">
+            {{ range $contact.socials }}
+                <a href="{{ .url }}" class="social-icon" target="_blank" rel="noopener" aria-label="{{ .label }}">
+                    <img src="{{ .icon }}" alt="" width="22" height="22" loading="lazy">
+                </a>
+            {{ end }}
+        </div>
+
+        {{/* Local time is filled in by scripts.js; without JS only the place shows */}}
+        <p class="footer-local">
+            {{ with $contact.location }}{{ . }}{{ end }}<span class="local-time" data-timezone="Africa/Blantyre" hidden></span>
+        </p>
     </div>
+
 </div>

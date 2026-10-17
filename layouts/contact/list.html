@@ -1,30 +1,23 @@
 {{ define "main" }}
+    {{ $contact := partial "contact-info.html" . }}
     <div class="contact-page container">
         <div class="contact-information">
-            <p class="contact-message">Let's connect & build something meaningful</p>
-            <p class="contact-email">sainhope16@gmail.com</p>
-            <div class="social-links">
-                <a href="/resume/Hope-Sain-Resume.pdf" target="_blank"><button class="resume-button">Resume</button></a>
-                <a href="https://github.com/hopesain" target="_blank"><img src="/images/socials/github.png" alt="github-logo"></a>
-                <a href="https://x.com/HopeSain" target="_blank"><img src="/images/socials/x.png" alt="x-logo"></a>
-                <a href="https://www.linkedin.com/in/hopesain/" target="_blank"><img src="/images/socials/linkedin.png" alt="linkedin-logo"></a>
-            </div>
-            
+            <h1 class="contact-message">Let's connect &amp; build something meaningful</h1>
+            {{ with $contact.email }}
+                <a href="mailto:{{ . }}" class="contact-email">{{ . }}</a>
+            {{ end }}
+            {{ partial "social-links.html" $contact }}
         </div>
 
         <div class="interests">
-            {{ range $index, $interest := site.Data.contact.interests }}
+            {{ range $index, $interest := hugo.Data.contact.interests }}
                 <div class="interest-item">
-                    <p class="interest-title">{{ $interest.title }}</p>
+                    <h2 class="interest-title">{{ $interest.title }}</h2>
                     <p class="interest-description">{{ $interest.description }}</p>
                 </div>
 
                 <hr>
-
             {{ end }}
-            
         </div>
-
     </div>
-
 {{ end }}
