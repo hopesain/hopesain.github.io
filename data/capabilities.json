@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Backend & APIs",
+        "description": "Go and Python services, RESTful APIs and the databases behind them, structured with SOLID principles so they stay easy to change."
+    },
+    {
+        "title": "Algorithms",
+        "description": "Logic where the numbers have to be right: loan amortization and repayment schedules, and feed formulation for livestock."
+    },
+    {
+        "title": "Data & machine learning",
+        "description": "Models that solve practical problems, like identifying maize, cotton and tomato diseases from images with TensorFlow."
+    },
+    {
+        "title": "Embedded & IoT",
+        "description": "Arduino and C++ systems that read sensors and respond in real time, built as clear state machines."
+    },
+    {
+        "title": "Full-stack products",
+        "description": "Angular and React interfaces, prototyped in PenPot and built as components, so the whole product fits together."
+    }
+]

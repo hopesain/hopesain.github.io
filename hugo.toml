@@ -3,6 +3,7 @@ locale = 'en-us'
 title = 'Hope Sain'
 
 [params]
+  role = 'Computer Programmer'
   tagline = 'Computer programmer from Malawi.'
 
 # Shared by the header and the footer's "Explore" column

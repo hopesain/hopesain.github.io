@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    {{- /* Falls back to the section name, so a section without a title still reads well */}}
+    {{- $pageTitle := .Title | default (.Section | humanize) }}
+    <title>{{ if .IsHome }}{{ site.Title }} | {{ site.Params.role }}{{ else }}{{ $pageTitle }} | {{ site.Title }}{{ end }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.tagline }}{{ end }}">
 
     <!-- Fonts -->

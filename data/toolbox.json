@@ -1,0 +1,14 @@
+[
+    {
+        "group": "Languages",
+        "items": ["Golang", "Python", "C++", "TypeScript", "JavaScript", "Dart"]
+    },
+    {
+        "group": "Frameworks",
+        "items": ["Fiber", "Django", "TensorFlow", "Angular", "React", "Hugo"]
+    },
+    {
+        "group": "Hardware & tools",
+        "items": ["Arduino", "Angular Material", "PenPot", "RESTful APIs", "Database design"]
+    }
+]
