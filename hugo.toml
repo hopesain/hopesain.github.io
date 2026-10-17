@@ -2,9 +2,38 @@ baseURL = "https://hopesain.github.io/"
 locale = 'en-us'
 title = 'Hope Sain'
 
+# robots.txt (layouts/robots.txt) points search engines at /sitemap.xml
+enableRobotsTXT = true
+
+# Tag and category pages aren't used, so don't build (or index) them
+disableKinds = ['taxonomy', 'term']
+
 [params]
   role = 'Computer Programmer'
   tagline = 'Computer programmer from Malawi.'
+  # Shown in search results and link previews for the home page
+  description = 'Hope Sain is a computer programmer from Malawi building backend systems, APIs, data and machine learning solutions, and embedded IoT systems.'
+  # From Google Search Console: Settings > Ownership verification > HTML tag.
+  # Paste only the content="..." value here.
+  googleSiteVerification = ''
+
+# Projects now come from data/projects.json, so the old Markdown pages in
+# content/projects/ are not built (keeps empty placeholder pages out of Google)
+[[cascade]]
+  [cascade.build]
+    render = 'never'
+    list = 'never'
+  [cascade.target]
+    path = '/projects/*'
+
+# Articles aren't ready yet: still built, but kept out of the sitemap and
+# marked noindex. Remove this block once the first articles are published.
+[[cascade]]
+  noindex = true
+  [cascade.sitemap]
+    disable = true
+  [cascade.target]
+    path = '{/articles,/articles/**}'
 
 # Shared by the header and the footer's "Explore" column
 [menus]

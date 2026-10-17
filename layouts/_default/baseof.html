@@ -7,7 +7,8 @@
     {{- /* Falls back to the section name, so a section without a title still reads well */}}
     {{- $pageTitle := .Title | default (.Section | humanize) }}
     <title>{{ if .IsHome }}{{ site.Title }} | {{ site.Params.role }}{{ else }}{{ $pageTitle }} | {{ site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.tagline }}{{ end }}">
+    <meta name="description" content="{{ .Description | default site.Params.description | default site.Params.tagline }}">
+    {{ partial "seo.html" . }}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

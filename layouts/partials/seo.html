@@ -1,0 +1,86 @@
+{{- /*
+    Search and social metadata: canonical URL, robots, Open Graph, Twitter card,
+    Search Console verification, and structured data (JSON-LD) on the home page.
+
+    Usage: {{ partial "seo.html" . }} inside <head>
+*/ -}}
+{{- $contact := partial "contact-info.html" . -}}
+{{- $title := .Title | default (.Section | humanize) -}}
+{{- $fullTitle := cond .IsHome (printf "%s | %s" site.Title site.Params.role) (printf "%s | %s" $title site.Title) -}}
+{{- $description := .Description | default site.Params.description | default site.Params.tagline -}}
+
+{{- /* Share image: the profile photo, cropped square as a JPEG (widest support in link previews) */ -}}
+{{- $image := "" -}}
+{{- with resources.Get "images/profile/hopesain.jpeg" -}}
+    {{- $image = .Fill "600x600 jpg q80 Center" -}}
+{{- end }}
+
+<link rel="canonical" href="{{ .Permalink }}">
+{{- if .Params.noindex }}
+<meta name="robots" content="noindex, follow">
+{{- end }}
+{{- with site.Params.googleSiteVerification }}
+<meta name="google-site-verification" content="{{ . }}">
+{{- end }}
+
+<!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
+<meta property="og:type" content="{{ if .IsHome }}profile{{ else }}website{{ end }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $fullTitle }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="en_US">
+{{- with $image }}
+<meta property="og:image" content="{{ .Permalink }}">
+<meta property="og:image:width" content="{{ .Width }}">
+<meta property="og:image:height" content="{{ .Height }}">
+<meta property="og:image:alt" content="{{ site.Title }}">
+{{- end }}
+{{- if .IsHome }}
+<meta property="profile:first_name" content="Hope">
+<meta property="profile:last_name" content="Sain">
+{{- end }}
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $fullTitle }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with $image }}
+<meta name="twitter:image" content="{{ .Permalink }}">
+{{- end }}
+{{- with $contact.socials }}
+    {{- range where . "key" "x" }}
+<meta name="twitter:site" content="@{{ path.Base (strings.TrimSuffix "/" .url) }}">
+    {{- end }}
+{{- end }}
+
+{{- /* Structured data: tells Google who this site is about (name, role, profiles) */ -}}
+{{- if .IsHome }}
+    {{- $sameAs := slice -}}
+    {{- range $contact.socials }}{{ $sameAs = $sameAs | append .url }}{{ end -}}
+    {{- $person := dict
+        "@type" "Person"
+        "@id" (printf "%s#person" site.Home.Permalink)
+        "name" site.Title
+        "givenName" "Hope"
+        "familyName" "Sain"
+        "url" site.Home.Permalink
+        "jobTitle" site.Params.role
+        "description" $description
+        "nationality" (dict "@type" "Country" "name" "Malawi")
+        "address" (dict "@type" "PostalAddress" "addressCountry" "MW")
+        "alumniOf" (dict "@type" "CollegeOrUniversity" "name" "Lilongwe University of Agriculture and Natural Resources (LUANAR)")
+        "knowsAbout" (slice "Backend development" "RESTful APIs" "Golang" "Python" "Data science" "Machine learning" "Embedded systems" "IoT")
+        "sameAs" $sameAs
+    -}}
+    {{- with $image }}{{ $person = merge $person (dict "image" .Permalink) }}{{ end -}}
+    {{- with $contact.email }}{{ $person = merge $person (dict "email" (printf "mailto:%s" .)) }}{{ end -}}
+    {{- $website := dict
+        "@type" "WebSite"
+        "@id" (printf "%s#website" site.Home.Permalink)
+        "name" site.Title
+        "url" site.Home.Permalink
+        "author" (dict "@id" (printf "%s#person" site.Home.Permalink))
+    -}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $person $website) | jsonify | safeJS }}</script>
+{{- end }}
