@@ -1,23 +1,104 @@
 {{ define "main" }}
     {{ $contact := partial "contact-info.html" . }}
     <div class="contact-page container">
-        <div class="contact-information">
-            <h1 class="contact-message">Let's connect &amp; build something meaningful</h1>
-            {{ with $contact.email }}
-                <a href="mailto:{{ . }}" class="contact-email">{{ . }}</a>
-            {{ end }}
-            {{ partial "social-links.html" $contact }}
-        </div>
 
-        <div class="interests">
-            {{ range $index, $interest := hugo.Data.contact.interests }}
-                <div class="interest-item">
-                    <h2 class="interest-title">{{ $interest.title }}</h2>
-                    <p class="interest-description">{{ $interest.description }}</p>
-                </div>
+        <section class="contact-intro" data-reveal-stagger>
+            <p class="eyebrow reveal"><span class="status-dot" aria-hidden="true"></span>Open to collaborations</p>
+            <h1 class="contact-title reveal">Let's connect &amp; build something meaningful.</h1>
+            <p class="contact-lead reveal">
+                A project, a research idea, a startup or just a hello. My inbox is open,
+                and I read every message.
+            </p>
+        </section>
 
-                <hr>
-            {{ end }}
-        </div>
+        <!-- Terminal card: the contact details, the way a programmer would print them -->
+        <section class="terminal reveal" aria-label="Contact details">
+            <div class="terminal-bar" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <p class="terminal-name">~/contact</p>
+            </div>
+
+            <div class="terminal-body">
+                <p class="terminal-line"><span class="prompt" aria-hidden="true">~ $</span> whoami</p>
+                <p class="terminal-out">{{ site.Title }} &mdash; computer programmer</p>
+
+                <p class="terminal-line"><span class="prompt" aria-hidden="true">~ $</span> cat contact.txt</p>
+                <dl class="terminal-list">
+                    {{ with $contact.email }}
+                        <div>
+                            <dt>email</dt>
+                            <dd>
+                                <a href="mailto:{{ . }}" class="terminal-email">{{ . }}</a>
+                                {{/* Shown by scripts.js when the clipboard is available */}}
+                                <button type="button" class="copy-button" data-copy="{{ . }}" hidden>Copy</button>
+                            </dd>
+                        </div>
+                    {{ end }}
+                    {{ with $contact.location }}
+                        <div>
+                            <dt>based in</dt>
+                            <dd>{{ . }}<span class="local-time" hidden></span></dd>
+                        </div>
+                    {{ end }}
+                    <div>
+                        <dt>status</dt>
+                        <dd class="terminal-status">open to collaborations</dd>
+                    </div>
+                </dl>
+
+                <p class="terminal-line"><span class="prompt" aria-hidden="true">~ $</span> <span class="cursor" aria-hidden="true"></span></p>
+            </div>
+        </section>
+
+        <!-- Every way to reach me -->
+        <section class="channels" aria-labelledby="channels-heading">
+            <h2 class="section-label reveal" id="channels-heading">Find me on</h2>
+
+            <ul class="channel-list" data-reveal-stagger>
+                {{ with $contact.email }}
+                    <li class="reveal">
+                        <a href="mailto:{{ . }}" class="channel">
+                            <span class="channel-name">Email</span>
+                            <span class="channel-handle">{{ . }}</span>
+                            <span class="channel-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                    </li>
+                {{ end }}
+                {{ range $contact.socials }}
+                    <li class="reveal">
+                        <a href="{{ .url }}" class="channel" target="_blank" rel="noopener">
+                            <span class="channel-name">{{ .label }}</span>
+                            <span class="channel-handle">@{{ path.Base (strings.TrimSuffix "/" .url) }}</span>
+                            <span class="channel-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                    </li>
+                {{ end }}
+                {{ with $contact.resume }}
+                    <li class="reveal">
+                        <a href="{{ . }}" class="channel" target="_blank" rel="noopener">
+                            <span class="channel-name">Resume</span>
+                            <span class="channel-handle">PDF</span>
+                            <span class="channel-arrow" aria-hidden="true">&darr;</span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ul>
+        </section>
+
+        <!-- What I'm happy to talk about -->
+        <section class="interests" aria-labelledby="interests-heading">
+            <h2 class="section-label reveal" id="interests-heading">Let's talk about</h2>
+
+            <ol class="interest-list" data-reveal-stagger>
+                {{ range $index, $interest := hugo.Data.contact.interests }}
+                    <li class="interest-item reveal">
+                        <span class="interest-number" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
+                        <h3 class="interest-title">{{ $interest.title }}</h3>
+                        <p class="interest-description">{{ $interest.description }}</p>
+                    </li>
+                {{ end }}
+            </ol>
+        </section>
+
     </div>
 {{ end }}
