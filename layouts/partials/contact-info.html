@@ -2,6 +2,7 @@
     Single source for contact details (data/contact/details.json).
 
     Returns a dict:
+      image         profile photo, relative to static/ (e.g. "images/profile/hopesain.png")
       email
       phone         raw number, e.g. "+265998664910"   (use in tel: links)
       phoneDisplay  readable number, e.g. "+265 998 664 910"
@@ -37,6 +38,7 @@
 {{- end -}}
 
 {{- return dict
+    "image" ($c.image | default "")
     "email" ($c.email | default "")
     "phone" $phone
     "phoneDisplay" $phoneDisplay

@@ -11,7 +11,7 @@
 
 {{- /* Share image: the profile photo, cropped square as a JPEG (widest support in link previews) */ -}}
 {{- $image := "" -}}
-{{- with resources.Get "images/profile/hopesain.jpeg" -}}
+{{- with $contact.image | default "" | resources.Get -}}
     {{- $image = .Fill "600x600 jpg q80 Center" -}}
 {{- end }}
 
