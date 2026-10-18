@@ -58,9 +58,10 @@ disableKinds = ['taxonomy', 'term']
   [caches.images]
     dir = ':cacheDir/images'
 
-# Project logos live in static/images/projects (drop-in replaceable) but are
-# mounted into assets so Hugo can resize and compress them. The originals are
-# excluded from static so only the optimised versions are published.
+# Project logos (static/images/projects) and the profile photo
+# (static/images/profile) are drop-in replaceable, but are mounted into assets
+# so Hugo can resize and compress them. The originals are excluded from static
+# so only the optimised versions are published.
 # Declaring mounts replaces the defaults, so assets and static are re-added.
 [module]
   [[module.mounts]]
@@ -69,7 +70,10 @@ disableKinds = ['taxonomy', 'term']
   [[module.mounts]]
     source = 'static'
     target = 'static'
-    files = ['! images/projects/**']
+    files = ['! images/projects/**', '! images/profile/**']
   [[module.mounts]]
     source = 'static/images/projects'
     target = 'assets/images/projects'
+  [[module.mounts]]
+    source = 'static/images/profile'
+    target = 'assets/images/profile'
